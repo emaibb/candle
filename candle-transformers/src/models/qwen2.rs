@@ -38,9 +38,9 @@ pub struct Config {
 }
 
 #[derive(Debug, Clone)]
-struct RotaryEmbedding {
-    sin: Tensor,
-    cos: Tensor,
+pub struct RotaryEmbedding {
+    pub sin: Tensor,
+    pub cos: Tensor,
 }
 
 impl RotaryEmbedding {
@@ -80,11 +80,11 @@ impl RotaryEmbedding {
 
 #[derive(Debug, Clone)]
 #[allow(clippy::upper_case_acronyms)]
-struct MLP {
-    gate_proj: Linear,
-    up_proj: Linear,
-    down_proj: Linear,
-    act_fn: Activation,
+pub struct MLP {
+    pub gate_proj: Linear,
+    pub up_proj: Linear,
+    pub down_proj: Linear,
+    pub act_fn: Activation,
 }
 
 impl MLP {
@@ -112,18 +112,18 @@ impl Module for MLP {
 }
 
 #[derive(Debug, Clone)]
-struct Attention {
-    q_proj: Linear,
-    k_proj: Linear,
-    v_proj: Linear,
-    o_proj: Linear,
-    num_heads: usize,
-    num_kv_heads: usize,
-    num_kv_groups: usize,
-    head_dim: usize,
-    hidden_size: usize,
-    rotary_emb: Arc<RotaryEmbedding>,
-    kv_cache: Option<(Tensor, Tensor)>,
+pub struct Attention {
+    pub q_proj: Linear,
+    pub k_proj: Linear,
+    pub v_proj: Linear,
+    pub o_proj: Linear,
+    pub num_heads: usize,
+    pub num_kv_heads: usize,
+    pub num_kv_groups: usize,
+    pub head_dim: usize,
+    pub hidden_size: usize,
+    pub rotary_emb: Arc<RotaryEmbedding>,
+    pub kv_cache: Option<(Tensor, Tensor)>,
 }
 
 impl Attention {
@@ -215,11 +215,11 @@ impl Attention {
 }
 
 #[derive(Debug, Clone)]
-struct DecoderLayer {
-    self_attn: Attention,
-    mlp: MLP,
-    input_layernorm: RmsNorm,
-    post_attention_layernorm: RmsNorm,
+pub struct DecoderLayer {
+    pub self_attn: Attention,
+    pub mlp: MLP,
+    pub input_layernorm: RmsNorm,
+    pub post_attention_layernorm: RmsNorm,
 }
 
 impl DecoderLayer {
@@ -263,12 +263,12 @@ impl DecoderLayer {
 
 #[derive(Debug, Clone)]
 pub struct Model {
-    embed_tokens: candle_nn::Embedding,
-    layers: Vec<DecoderLayer>,
-    norm: RmsNorm,
-    sliding_window: usize,
-    device: Device,
-    dtype: DType,
+    pub embed_tokens: candle_nn::Embedding,
+    pub layers: Vec<DecoderLayer>,
+    pub norm: RmsNorm,
+    pub sliding_window: usize,
+    pub device: Device,
+    pub dtype: DType,
 }
 
 impl Model {
@@ -370,8 +370,8 @@ impl Model {
 
 #[derive(Debug, Clone)]
 pub struct ModelForCausalLM {
-    base_model: Model,
-    lm_head: Linear,
+    pub base_model: Model,
+    pub lm_head: Linear,
 }
 
 impl ModelForCausalLM {

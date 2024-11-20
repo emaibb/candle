@@ -35,7 +35,7 @@ impl Module for Embedding {
 
 #[derive(Debug, Clone)]
 pub struct Linear {
-    inner: candle_nn::Linear,
+    pub inner: candle_nn::Linear,
     span: tracing::Span,
 }
 
@@ -139,7 +139,7 @@ impl std::fmt::Debug for QMatMul {
 
 #[derive(Clone, Debug)]
 pub struct LayerNorm {
-    inner: candle_nn::LayerNorm,
+    pub inner: candle_nn::LayerNorm,
     span: tracing::Span,
 }
 
@@ -170,7 +170,7 @@ pub fn layer_norm<C: Into<candle_nn::LayerNormConfig>>(
 
 #[derive(Debug, Clone)]
 pub struct RmsNorm {
-    inner: candle_nn::RmsNorm,
+    pub inner: candle_nn::RmsNorm,
     span: tracing::Span,
 }
 
